@@ -55,7 +55,7 @@ def exit():
 @app.route('/reset')
 def treset():
     writeCommand("r")
-    time.sleep(0.005)
+    time.sleep(0.1)
     writeCommand(str(1)) # Up apres restart
     return 'ok',200
 
