@@ -123,7 +123,10 @@ class telemetry:
     def makeResponse(self):
         #On est pas en jeu
         if self.GameState == 1: return json.dumps({"Status":"Menu"}),200
-        elif self.GameState == 3: return json.dumps({"Status":"Paused"}),200
+        elif self.GameState == 3: return json.dumps({
+            "MapId":self.MapId,
+            "Status":"Paused"
+            }),200
         elif self.GameState != 2: return json.dumps({"Status":"Error"}),500
 
         #On est en jeu
@@ -137,6 +140,7 @@ class telemetry:
         elif self.RaceState == 2:
             return json.dumps({
                 "Status":"Finished",
+                "MapId":self.MapId,
                 "RaceTime":self.Time,
                 "Respawns":self.NbRespawns
             }),200
@@ -145,6 +149,7 @@ class telemetry:
         #On est en course
         return json.dumps(
             {   "Status":"Running",
+                "MapId":self.MapId,
                 "Checkpoint":self.NbCheckpoints,
                 "Respawns":self.NbRespawns,
                 "Time":self.Time,
