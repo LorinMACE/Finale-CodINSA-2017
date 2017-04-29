@@ -1,0 +1,14 @@
+01;12;17;StadiumRoadMainStartLine;3
+02;12;17;StadiumRoadMainStraight;3
+03;12;17;StadiumRoadMainStraight;3
+04;12;17;StadiumRoadMainStraight;3
+04;12;17;StadiumRoadMainStraight;3
+05;12;17;StadiumRoadMainStraight;3
+06;12;17;StadiumRoadMainStraight;3
+07;12;17;StadiumRoadMainStraight;3
+08;12;17;StadiumRoadMainStraight;3
+09;12;17;StadiumRoadMainStraight;3
+10;12;17;StadiumRoadMainStraight;3
+11;12;17;StadiumRoadMainGTCurve3;0
+13;12;20;StadiumRoadMainStraight;0
+13;12;21;StadiumRoadMainFinishLine;0

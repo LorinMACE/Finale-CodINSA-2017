@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello World!</title>
+</head>
+
+<body>
+
+  <pre id="Datas">
+
+  </pre>
+
+
+  <script
+  			  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  			  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  			  crossorigin="anonymous"></script>
+
+  <script>
+
+    setInterval(function(){
+      $.getJSON( window.location.href+"datas", function( data ) {
+        $("#Datas").html( JSON.stringify(data, null, 2));
+      });
+    },60);
+
+var up = 0;
+var down = 0;
+var left = 0;
+var right = 0;
+
+function sendstate(){
+  var command = (up?"U":"")+(down?"D":"")+(left?"L":"")+(right?"R":"");
+  $.get( window.location.href+"command?c="+command);
+}
+
+function checkKey(e){
+  switch (e.keyCode) {
+
+    case 40:
+      if (!down){
+        down = 1;
+        sendstate();
+      }
+      break;
+
+    case 38:
+      if (!up){
+        up = 1;
+        sendstate();
+      }
+      break;
+
+    case 37:
+      if (!left){
+        left = 1;
+        sendstate();
+      }
+      break;
+
+    case 39:
+      if (!right){
+        right = 1;
+        sendstate();
+      }
+      break;
+  }
+}
+
+
+function checkKeyUp(e){
+  switch (e.keyCode) {
+
+    case 40:
+      down = 0;
+      sendstate();
+      break;
+
+    case 38:
+      up = 0;
+      sendstate();
+      break;
+
+    case 37:
+      left = 0;
+      sendstate();
+      break;
+
+    case 39:
+      right = 0;
+      sendstate();
+      break;
+  }
+}
+
+$(document).keydown (checkKey);
+$(document).keyup (checkKeyUp);
+</script>
+
+
+
+
+</body>
+
+</html>

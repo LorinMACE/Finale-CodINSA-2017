@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8 />
+  <title>Map</title>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+  Map Name: <input type="text" name="mname" id="mapname"><br> <input type="submit" value="Submit" id="submit">
+  <div id="map">
+  </div>
+  <script>
+  $("#submit").click(function() {
+    $.getJSON( "/track?t="+document.getElementById('mapname').value, function( data ) {
+      $('#map').empty();
+      var blocs = [];
+      var map = [];
+      for(var i=0; i<32; i++) {
+          map[i] = [];
+          for(var j=0; j<32; j++) {
+              map[i][j] = ["nada",0];
+          }
+      }
+
+      $.each( data, function( key, val ) {
+        map[val.X-1][val.Z-1] = [val.Type,val.Rot];
+      });
+      for(var i=0; i<32; i++) {
+          for(var j=0; j<32; j++) {
+              $('#map').append( "<div class=\""+map[i][j][0]+" rot"+map[i][j][1]+"\"></div>" );
+          }
+      }
+    });
+  });
+  </script>
+
+  <style>
+
+  #map{
+    width:1024px;
+    height:1024px;
+    font-size: 0;
+  }
+
+  #map > div{
+    display: inline-block;
+    width:32px;
+    height:32px;
+    background-color:green;
+  }
+
+  .StadiumRoadMainStraight{ background-image: url(TilesApi/Straight.png);background-size: contain;}
+  .StadiumRoadMainStartLine{ background-image: url(TilesApi/Start.png);background-size: contain;}
+  .StadiumRoadMainCheckpoint{ background-image: url(TilesApi/Checkpoint.png);background-size: contain;}
+  .StadiumRoadMainFinishLine{ background-image: url(TilesApi/End.png);background-size: contain;}
+  .StadiumRoadMainCorner{ background-image: url(TilesApi/Small-Corner.png);background-size: contain;}
+  .StadiumRoadMainTurbo{ background-image: url(TilesApi/Turbo.png);background-size: contain;}
+  .StadiumRampLow{ background-image: url(TilesApi/Ramp.png);background-size: contain;}
+  .StadiumRoadMainBiSlopeStart{ background-image: url(TilesApi/Straight.png);background-size: contain;}
+  .StadiumRoadMainBiSlopeEnd{ background-image: url(TilesApi/Straight.png);background-size: contain;}
+  .StadiumRoadMainGTCurve2{
+    background-image: url(TilesApi/Big-Corner.png);
+    background-size: 64px 64px;
+    padding-right: 32px;
+    margin-right: -32px;
+    padding-bottom: 32px;
+    margin-bottom: -32px;
+    overflow: visible;
+  }
+  .StadiumRoadMainGTCurve3{
+    background-image: url(TilesApi/Big-Corner.png);
+    background-size: 96px 96px;
+    padding-right: 64px;
+    margin-right: -64px;
+    padding-bottom: 64px;
+    margin-bottom: -64px;
+    overflow: visible;
+  }
+  .StadiumRoadMainGTCurve4{
+    background-image: url(TilesApi/Big-Corner.png);
+    background-size: 128px 128px;
+    padding-right: 96px;
+    margin-right: -96px;
+    padding-bottom: 96px;
+    margin-bottom: -96px;
+    overflow: visible;
+  }
+
+  .rot1{
+    -webkit-transform: rotate(-90deg);
+    -moz-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    -o-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+  }
+
+  .rot2{
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+
+  .rot3{
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+  }
+  </style>
+</body>
+
+</html>
